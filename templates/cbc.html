@@ -1,0 +1,53 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/css/style.css">
+    <title>S-AES</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="/" class="nav-link">Encryption/Decryption</a>
+        <a href="/middle_attack" class="nav-link">Meet in the middle attack</a>
+        <a href="/cbc" class="nav-link">Cipher Block Chaining</a>
+      </div>
+    </nav>
+    <div class="total-container">
+      <div class="left-container">
+        <h2>Result</h2>
+        {% if output_text %}
+        <h3>{{ output_text }}</h3>
+        {% endif %}
+      </div>
+      <div class="right-container">
+        <form class="form" method="post">
+          <div class="logo">Cipher Block Chaining Mode</div>
+          <div class="drop-container">
+            <label class="label" type="text">Please select the binary /ASCII input type and the encryption/decryption mode</br>
+              <select class="button" name="input_type" id="input_type">
+                <option value="Binary" {% if input_type =="Binary" %} selected {% endif %}>Binary</option>
+                <option value="ASCII" {% if input_type =="ASCII" %} selected {% endif %}>ASCII</option>
+              </select>
+              <select  class="button" name="mode" id="mode">
+                <option value="Encrypt" {% if mode =="Encrypt" %} selected {% endif %}>Encrypt</option>
+                <option value="Decrypt" {% if mode =="Decrypt" %} selected {% endif %}>Decrypt</option>
+              </select>
+            </label>
+          </div>
+          <label class="label">Enter plaintext or cipher text</label>
+          <input class="input" type="text" id="input" name="input" required value="{{ input_text }}">
+          <label class="label">Enter iv ( 16 bit )</label>
+          <input class="input" type="text" id="iv" name="iv" required value="{{ iv }}">
+          <label class="label">Input key (16 bit)</label>
+          <input class="input" type="text" id="key" name="key" required value="{{ key }}">
+          <input class="input submit" type="submit" value="Encrypt / Decrypt">
+        </form>
+      </div>
+    </div>
+    <footer class="footer">
+      <p>Encryption and decryption algorithms are the guardians of the digital world, ensuring the security of information transmission.</p>
+    </footer>
+  </body>
+</html>

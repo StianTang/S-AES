@@ -1,0 +1,57 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/css/style.css">
+    <title>S-AES</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="/" class="nav-link">Encryption/Decryption</a>
+        <a href="/middle_attack" class="nav-link">Meet in the middle attack</a>
+        <a href="/cbc" class="nav-link">Cipher Block Chaining</a>
+      </div>
+    </nav>
+    <div class="total-container">
+      <div class="left-container">
+        <h2>Result</h2>
+    {% if potential_keys %}
+        <p>Number of potential key pairs: {{ potential_keys|length }}</p>
+        {% if potential_keys|length > 5 %}
+            <p>Top 5 potential key pairs in 32-bit binary format:</p>
+            <ul>
+                {% for key in potential_keys[:5] %}
+                    <li>{{ key[0] }} + {{ key[1] }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>All potential key pairs in 32-bit binary format:</p>
+            <ul>
+                {% for key in potential_keys %}
+                    <li>{{ key[0] }} + {{ key[1] }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <p>Time taken: {{ time_taken }} seconds</p>
+{% else %}
+    <p>No matching key found.</p>
+{% endif %}
+      </div>
+      <div class="right-container">
+        <form class="form" method="POST">
+          <div class="logo">Meet-in-the-Middle Attack</div>
+          <label class="label" for="known_plain_texts">Enter known plaintexts (separated by commas)</label>
+          <input class="input" type="text" id="known_plain_texts" name="known_plain_texts" value="{{ known_plain_texts }}" required><br><br>
+          <label class="label" for="known_ciphers">Enter known ciphertexts (separated by commas)</label>
+          <input class="input" type="text" id="known_ciphers" name="known_ciphers" value="{{ known_ciphers }}" required><br><br>
+          <input class="input submit" type="submit" value="Run">
+        </form>
+      </div>
+    </div>
+    <footer class="footer">
+      <p>Encryption and decryption algorithms are the guardians of the digital world, ensuring the security of information transmission.</p>
+    </footer>
+  </body>
+</html>
